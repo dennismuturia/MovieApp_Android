@@ -35,7 +35,7 @@ public class MovieActivity extends AppCompatActivity {
 
         getMovies(movie);
     }
-
+//THis method is for ga
     public void getMovies(String query){
         final MovieService movieService = new MovieService();
         movieService.theMovies(query, new okhttp3.Callback() {

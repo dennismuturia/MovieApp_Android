@@ -24,9 +24,10 @@ public class MovieService {
         urlBuilder.addQueryParameter(Constants.MOVIE_LOCATION_QUERY_PARAMETER,query);
 
 
-
+//THis is where the url is built right from the httpurl builder above
         String url = urlBuilder.build().toString();
         Log.v(TAG,"RESULT"+url);
+        //THis sends the request to the site and builds it
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -36,4 +37,5 @@ public class MovieService {
 
 
     }
+    //Now lets parse JSON and create Objects
 }
