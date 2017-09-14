@@ -5,4 +5,5 @@ package com.example.dennis.movieapp;
  */
 
 public class Constants {
+    public static final String MOVIE_API_KEY = BuildConfig.MOVIE_API_KEY;
 }
