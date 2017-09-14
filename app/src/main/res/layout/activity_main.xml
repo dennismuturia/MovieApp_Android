@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/thisEditText"
         android:hint="Enter The movie"
+        android:textColor="@color/colorAccent"
         tools:layout_editor_absoluteY="398dp"
         tools:layout_editor_absoluteX="8dp"
         android:layout_above="@+id/movieButton"
