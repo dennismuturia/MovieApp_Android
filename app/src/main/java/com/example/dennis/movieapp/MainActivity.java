@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String movie = myEditText.getText().toString();
+                String query = myEditText.getText().toString();
                 Intent intent = new Intent(MainActivity.this, MovieActivity.class);
-                intent.putExtra("movie", movie);
+                intent.putExtra("query", query);
                 startActivity(intent);
             }
         });

@@ -2,6 +2,13 @@ package com.example.dennis.movieapp;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -38,4 +45,35 @@ public class MovieService {
 
     }
     //Now lets parse JSON and create Objects
+    public ArrayList<Movie>processResults(Response response){
+        ArrayList<Movie>movies = new ArrayList<>();
+        try {
+            String jsonData = response.body().string();
+            if (response.isSuccessful()){
+                Log.v(TAG, jsonData);
+                JSONObject movieObjectJSON = new JSONObject(jsonData);
+                JSONArray ResultsJSON = movieObjectJSON.getJSONArray("results");
+                for (int i = 0; i < ResultsJSON.length(); i++){
+                    JSONObject movieObject = ResultsJSON.getJSONObject(i);
+                    //Now here get every data in the JSON
+                    String name = movieObject.getString("original_title");
+                    String voteCount = movieObject.getString("vote_count");
+                    String movieType = movieObject.getString("media_type");
+                    String image = movieObject.getString("poster_path");
+                    String totalCount = movieObject.getString("vote_average");
+
+                    //Now lets bind all the data together
+                    Movie movie = new Movie(name, voteCount, movieType, image, totalCount);
+
+                    //add all this data in that class movie
+                    movies.add(movie);
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return movies;
+    }
 }

@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.security.auth.callback.Callback;
 
@@ -19,6 +21,9 @@ public class MovieActivity extends AppCompatActivity {
     private static final String TAG = MovieActivity.class.getSimpleName() ;
 //This is a bind for the text view
     @Bind(R.id.displayText)TextView Display;
+    @Bind(R.id.myList)ListView thisList;
+
+    public ArrayList<Movie> mMovies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +35,10 @@ public class MovieActivity extends AppCompatActivity {
 
         //Lets Collect the data from the main activity
         Intent intent = getIntent();
-        String movie = intent.getStringExtra("movie");
-        Display.setText("Movie: " + movie);
+        String query = intent.getStringExtra("query");
+        Display.setText("Movie: " + query);
 
-        getMovies(movie);
+        getMovies(query);
     }
 //THis method is for ga
     public void getMovies(String query){
@@ -46,15 +51,20 @@ public class MovieActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
+/*
+* This try and catch method is ony used
+* for testing */
+
+//                try {
+//                    String jsonData = response.body().string();
                     if (response.isSuccessful()){
-                        Log.v(TAG, jsonData);
+//                        Log.v(TAG, jsonData);
+                        mMovies = movieService.processResults(response);
                     }
 
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
+//                }catch (IOException e){
+//                    e.printStackTrace();
+//                }
             }
         });
     }

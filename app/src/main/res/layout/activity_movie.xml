@@ -15,5 +15,9 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:textSize="20dp"></TextView>
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/myList"></ListView>
 
 </RelativeLayout>
